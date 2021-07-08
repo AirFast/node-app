@@ -17,6 +17,8 @@ db.once('open', function () {
     console.log('connect');
 });
 
+
+
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
