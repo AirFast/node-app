@@ -8,9 +8,14 @@ const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
 app.use(morgan('dev'));
+
+// DB conection
+mongoose.connect('mongodb+srv://airfast:' + process.env.MONGO_ATLAS_PASSWORD + '@node-app.vkxyf.mongodb.net/node-app?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Requests payloads middleware
 app.use(express.json());
 
-// CORS Middleware
+// CORS middleware
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -19,14 +24,6 @@ app.use((req, res, next) => {
         return res.status(200).json({});
     }
     next();
-});
-
-// DB conection
-mongoose.connect('mongodb://localhost:27017/node-app', { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    console.log('connect');
 });
 
 // Routes
