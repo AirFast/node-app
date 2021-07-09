@@ -8,13 +8,19 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    }
+
     res.status(201).json({
-        message: 'POST /products'
+        message: 'POST /products',
+        product: product
     });
 });
 
 router.get('/:id', (req, res, next) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
     res.status(200).json({
         message: `GET /products/${id}`
@@ -22,7 +28,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.patch('/:id', (req, res, next) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
     res.status(200).json({
         message: `PATCH /products/${id}`
@@ -30,7 +36,7 @@ router.patch('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
     res.status(200).json({
         message: `DELETE /products/${id}`
