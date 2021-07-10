@@ -2,15 +2,21 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-const morgan = require('morgan');
-
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
+// Dev
+const morgan = require('morgan');
 app.use(morgan('dev'));
 
 // DB conection
-mongoose.connect('mongodb+srv://airfast:' + process.env.MONGO_ATLAS_PASSWORD + '@node-app.vkxyf.mongodb.net/node-app?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(
+    'mongodb+srv://airfast:' + process.env.MONGO_ATLAS_PASSWORD + '@node-app.vkxyf.mongodb.net/node-app?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
 
 // Requests payloads middleware
 app.use(express.json());
